@@ -1,20 +1,12 @@
-# Assignment 1 - Circular Buffer
+ YSE-EC Assignment
 
-This project implements a Circular Buffer using C language.
+وصف المشروع
+هذا المشروع يهدف إلى تنفيذ مخزن دائري بلغة C
+المخزن الدائري هو بنية بيانات تسمح بتخزين البيانات بشكل حلقي باستخدام مؤشرات للرأس والذيل، مع التعامل الصحيح مع حالتي الامتلاء والفراغ.
 
-## Features
-
-- Buffer initialization
-- Write to buffer
-- Read from buffer
-- Handle overflow
-- Handle underflow
-
-## Main Function
-
-- Input user name
-- Append CE-ESY
-- Store data in circular buffer
-- Read data back
-- Print output
-- Ensure buffer is empty
+ما يقعله الكود : 
+تهيئة المخزن الدائري
+إدخال البيانات يعني حالة الكتابة 
+خراج البيانات يعني حالة قراءة
+معالجة حالتي الامتلاء (Overflow) والفراغ (Underflow)
+برنامج رئيسي يقوم بقراءة اسم من المستخدم، ثم يضيف النص YSE-EC إلى الاسم، ويخزن النتيجة في المخزن الدائري، ثم يقرأها ويعرضها على الشاشة
