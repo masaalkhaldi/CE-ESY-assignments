@@ -1,71 +1,70 @@
-
 #include <stdio.h>
 #include <string.h>
-#define SIZE 10
+
+#define MAX 15
 
 typedef struct {
-    char buffer[SIZE];
+    char data[MAX];
     int head;
     int tail;
     int count;
 } CircularBuffer;
 
-void initBuffer(CircularBuffer *cb) {
+void init_buffer(CircularBuffer *cb) {
     cb->head = 0;
     cb->tail = 0;
     cb->count = 0;
 }
 
-int isFull(CircularBuffer *cb) {
-    return cb->count == SIZE;
+int is_full(CircularBuffer *cb) {
+    return cb->count == MAX;
 }
 
-int isEmpty(CircularBuffer *cb) {
+int is_empty(CircularBuffer *cb) {
     return cb->count == 0;
 }
 
-void writeBuffer(CircularBuffer *cb, char data) {
-    if (isFull(cb)) {
-        printf("Buffer Overflow!\n");
+void push(CircularBuffer *cb, char item) {
+    if (is_full(cb)) {
+        printf("\nFull!");
         return;
     }
-    cb->buffer[cb->head] = data;
-    cb->head = (cb->head + 1) % SIZE;
+    cb->data[cb->tail] = item;
+    cb->tail = (cb->tail + 1) % MAX;
     cb->count++;
 }
 
-char readBuffer(CircularBuffer *cb) {
-    if (isEmpty(cb)) {
-        printf("Buffer Underflow!\n");
+char pop(CircularBuffer *cb) {
+    if (is_empty(cb)) {
         return '\0';
     }
-    char data = cb->buffer[cb->tail];
-    cb->tail = (cb->tail + 1) % SIZE;
+    char item = cb->data[cb->head];
+    cb->head = (cb->head + 1) % MAX;
     cb->count--;
-    return data;
+    return item;
 }
 
 int main() {
     CircularBuffer cb;
-    initBuffer(&cb);
+    init_buffer(&cb);
 
-    char name[50];
-    printf("Enter your name: ");
-    scanf("%s", name);
+    char input_name[50];
+    char tag[] = "CE-ESY";
 
-    strcat(name, "YSE-EC");
+    printf("Name: ");
+    scanf("%s", input_name);
 
-    // إدخال الاسم في المخزن
-    for (int i = 0; i < strlen(name); i++) {
-        writeBuffer(&cb, name[i]);
+    strcat(input_name, tag);
+
+    for (int i = 0; i < strlen(input_name); i++) {
+        push(&cb, input_name[i]);
     }
 
-    // قراءة آخر عنصر
-    while (!isEmpty(&cb)) {
-        char c = readBuffer(&cb);
-        printf("%c", c);
+    printf("Output: ");
+    while (!is_empty(&cb)) {
+        printf("%c", pop(&cb));
     }
+    printf("\n");
 
-    printf("\nBuffer is now empty.\n");
     return 0;
 }
